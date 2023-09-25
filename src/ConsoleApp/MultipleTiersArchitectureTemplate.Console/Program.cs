@@ -31,10 +31,11 @@ namespace MultipleTiersArchitectureTemplate.Console
                 .AddJsonFile("appsettings.production.json", optional: true, reloadOnChange: true)
                 .Build();
 
+
             // Define IOC
             var services = new ServiceCollection();
-            services.AddScoped<ITestService, TestService>();
-            services.AddSingleton<IConfiguration>(configuration);
+            services.AddScoped<ITestService, TestService>();     //Injection ITestService to the container
+            services.AddSingleton<IConfiguration>(configuration);//Injection IConfiguration to the container
 
             // Make use of IOC
             using (var sp = services.BuildServiceProvider())
