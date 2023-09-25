@@ -10,7 +10,8 @@ namespace MultipleTiersArchitectureTemplate.Console
     {
         static void Main(string[] args)
         {
-            Log.Logger = new LoggerConfiguration()//define
+            //define Serilog Log
+            Log.Logger = new LoggerConfiguration()
                         .WriteTo.File(
                             path: $"{AppContext.BaseDirectory}Logs\\log.log",
                             rollingInterval: RollingInterval.Day,
@@ -30,13 +31,17 @@ namespace MultipleTiersArchitectureTemplate.Console
                 .AddJsonFile("appsettings.production.json", optional: true, reloadOnChange: true)
                 .Build();
 
+            // Define IOC
             var services = new ServiceCollection();
             services.AddScoped<ITestService, TestService>();
             services.AddSingleton<IConfiguration>(configuration);
+
+            // Make use of IOC
             using (var sp = services.BuildServiceProvider())
             {
                 var testService = sp.GetRequiredService<ITestService>();
                 testService.PrintHelloWorld();
+                testService.PrintConfigInfo();
             }
         }
     }

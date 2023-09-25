@@ -9,5 +9,7 @@ namespace MultipleTiersArchitectureTemplate.BLL
     public interface ITestService
     {
         public void PrintHelloWorld();
+
+        public void PrintConfigInfo();
     }
 }

@@ -10,13 +10,18 @@ namespace MultipleTiersArchitectureTemplate.BLL
             _configuration = configuration;
         }
 
-        public void PrintHelloWorld()
+        public void PrintConfigInfo()
         {
             var title = _configuration["Position:Title"];
             var name = _configuration["Position:Name"];
 
             Console.WriteLine($"title:{title}");
             Console.WriteLine($"name:{name}");
+        }
+
+        public void PrintHelloWorld()
+        {
+            Console.WriteLine($"Hello world!");
         }
     }
 }
