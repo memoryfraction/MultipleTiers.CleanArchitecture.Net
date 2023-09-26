@@ -10,8 +10,8 @@ To avoid the duplicate works
 - MS UnitTest Project with Multiple environment, IOC + DI
 
 # Tiers
-- BLL
-- DAL
+- BusinessLogicLayer(BLL)
+- DataAccessLayer(DAL)
 - MODEL
 - Console
 - Tests
