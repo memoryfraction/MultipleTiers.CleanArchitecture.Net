@@ -1,4 +1,4 @@
-# MultipleTiers.CleanArchitecture.ConsoleApp.Net
+# MultipleTiers.CleanArchitecture.Net
 The clean Architecture template based on .Net for console app
 To avoid the duplicate works
 
