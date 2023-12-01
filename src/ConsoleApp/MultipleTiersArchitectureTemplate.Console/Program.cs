@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AutoMapper;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MultipleTiersArchitectureTemplate.BLL;
+using MultipleTiersArchitectureTemplate.BLL.Test.Services;
 using Serilog;
 
 
@@ -32,13 +34,33 @@ namespace MultipleTiersArchitectureTemplate.Console
                 .Build();
 
 
-            // Define IOC
-            var services = new ServiceCollection();
-            services.AddScoped<ITestService, TestService>();     //Injection ITestService to the container
-            services.AddSingleton<IConfiguration>(configuration);//Injection IConfiguration to the container
+            #region Dependency Injection
+            var serviceCollection = new ServiceCollection();
+
+            #region Scoped
+            serviceCollection.AddScoped<ITestService, TestService>();     //Injection ITestService to the container
+            #endregion
+
+
+            #region Singleton
+            serviceCollection.AddSingleton<IConfiguration>(configuration);//Injection IConfiguration to the container
+
+            // Register the Automapper to container
+            serviceCollection.AddSingleton<IMapper>(sp =>
+            {
+                var autoMapperConfiguration = new MapperConfiguration(cfg =>
+                {
+                    cfg.AddProfile<MappingProfile>();
+                });
+                return new Mapper(autoMapperConfiguration);
+            });
+            #endregion
+
+
+            #endregion
 
             // Make use of IOC
-            using (var sp = services.BuildServiceProvider())
+            using (var sp = serviceCollection.BuildServiceProvider())
             {
                 var testService = sp.GetRequiredService<ITestService>();
                 testService.PrintHelloWorld();

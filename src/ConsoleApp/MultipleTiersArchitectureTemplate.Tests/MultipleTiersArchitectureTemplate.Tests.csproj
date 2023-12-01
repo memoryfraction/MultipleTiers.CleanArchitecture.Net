@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MultipleTiersArchitectureTemplate.BLL\MultipleTiersArchitectureTemplate.BLL.csproj" />
-    <ProjectReference Include="..\MultipleTiersArchitectureTemplate.Model\MultipleTiersArchitectureTemplate.Model.csproj" />
+    <ProjectReference Include="..\MultipleTiersArchitectureTemplate.DAL\MultipleTiersArchitectureTemplate.DAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

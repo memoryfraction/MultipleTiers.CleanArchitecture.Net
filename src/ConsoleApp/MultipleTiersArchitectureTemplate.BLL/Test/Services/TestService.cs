@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace MultipleTiersArchitectureTemplate.BLL
+namespace MultipleTiersArchitectureTemplate.BLL.Test.Services
 {
     public class TestService : ITestService
     {

@@ -1,18 +1,23 @@
+using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MultipleTiersArchitectureTemplate.BLL;
+using MultipleTiersArchitectureTemplate.BLL.Test.Models;
+using MultipleTiersArchitectureTemplate.BLL.Test.Services;
+using MultipleTiersArchitectureTemplate.DAL.DataAccessModels;
 
 namespace MultipleTiersArchitectureTemplate.Tests
 {
     [TestClass]
     public class UnitTest1
     {
-        ServiceCollection _services;
+        ServiceProvider _serviceProvider;
+        ServiceCollection _serviceCollection;
 
         public UnitTest1()
         {
-            _services = new ServiceCollection();
-            _services.AddScoped<ITestService, TestService>();
+            _serviceCollection = new ServiceCollection();
+            _serviceCollection.AddScoped<ITestService, TestService>();
 
             // Build the configuration for config file, e.g. appsettings.json
             IConfiguration _configuration = new ConfigurationBuilder()
@@ -22,22 +27,55 @@ namespace MultipleTiersArchitectureTemplate.Tests
                 .AddJsonFile("appsettings.stage.json", optional: true, reloadOnChange: true)
                 .AddJsonFile("appsettings.production.json", optional: true, reloadOnChange: true)
                 .Build();
-            _services.AddSingleton<IConfiguration>(_configuration);
+            _serviceCollection.AddSingleton<IConfiguration>(_configuration);
+
+            // Register the Automapper to container
+            _serviceCollection.AddSingleton<IMapper>(sp =>
+            {
+                var autoMapperConfiguration = new MapperConfiguration(cfg =>
+                {
+                    cfg.AddProfile<MappingProfile>();
+                });
+                return new Mapper(autoMapperConfiguration);
+            });
+
+            _serviceProvider = _serviceCollection.BuildServiceProvider();
         }
 
 
         [TestMethod]
         public void TestMethod_Appsettings_Production()
         {
-            using (var sp = _services.BuildServiceProvider())
-            {
-                var testService = sp.GetRequiredService<ITestService>();
-                testService.PrintHelloWorld();
+            var testService = _serviceProvider.GetRequiredService<ITestService>();
+            testService.PrintHelloWorld();
 
-                var config = sp.GetRequiredService<IConfiguration>();
-                var title = config["Position:Title"];
-                Assert.AreEqual("Senior Software Engineer", title);
-            }
+            var config = _serviceProvider.GetRequiredService<IConfiguration>();
+            var title = config["Position:Title"];
+            Assert.AreEqual("Senior Software Engineer", title);
+            
         }
+
+
+        [TestMethod]
+        public void ModelsMapping_Should_Work()
+        {
+            var mapper = _serviceProvider.GetRequiredService<IMapper>();
+
+            var personBLLModel = GeneratePersonalBLLModel();
+            var personDALModel = mapper.Map<PersonDALModel>(personBLLModel);
+
+            Assert.IsNotNull(personDALModel);
+        }
+
+        private PersonBLLModel GeneratePersonalBLLModel()
+        {
+            var model = new PersonBLLModel();
+
+            model.Id = 1;
+            model.Name = "John Smith";
+
+            return model;
+        }
+
     }
 }
