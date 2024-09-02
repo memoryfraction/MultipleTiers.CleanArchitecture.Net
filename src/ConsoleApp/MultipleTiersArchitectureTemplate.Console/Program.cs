@@ -12,6 +12,9 @@ namespace MultipleTiersArchitectureTemplate.Console
     {
         static void Main(string[] args)
         {
+
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
             //define Serilog Log
             Log.Logger = new LoggerConfiguration()
                         .WriteTo.File(
@@ -65,6 +68,23 @@ namespace MultipleTiersArchitectureTemplate.Console
                 var testService = sp.GetRequiredService<ITestService>();
                 testService.PrintHelloWorld();
                 testService.PrintConfigInfo();
+            }
+        }
+
+
+        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            var exception = e.ExceptionObject as Exception;
+            if (exception != null)
+            {
+                // Log the exception message and stack trace for detailed information
+                Serilog.Log.Error(exception, $"A global unhandled exception occurred: {exception.Message}, StackTrace: {exception.StackTrace}");
+                System.Console.WriteLine("A global unhandled exception occurred. Please check the log for details.");
+            }
+            else
+            {
+                Serilog.Log.Error("An unknown exception occurred.");
+                System.Console.WriteLine("An unknown exception occurred. Please check the log for details.");
             }
         }
     }
