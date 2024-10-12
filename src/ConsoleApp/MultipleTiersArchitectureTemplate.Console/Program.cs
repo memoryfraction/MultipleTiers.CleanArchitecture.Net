@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using MultipleTiersArchitectureTemplate.BLL;
 using MultipleTiersArchitectureTemplate.BLL.Test.Services;
 using Serilog;
-using System;
 
 namespace MultipleTiersArchitectureTemplate.Console
 {
@@ -78,9 +77,19 @@ namespace MultipleTiersArchitectureTemplate.Console
         // Method to handle unhandled exceptions globally
         private static void UnhandledExceptionTrapper(object sender, UnhandledExceptionEventArgs e)
         {
-            var exception = (Exception)e.ExceptionObject;
-            Serilog.Log.Fatal(exception, "Unhandled exception occurred.");
-            System.Console.WriteLine("Fatal error occurred. Please check the logs for more details.");
+            var exception = e.ExceptionObject as Exception;
+            if (exception != null)
+            {
+                // Log the exception message and stack trace for detailed information
+                Serilog.Log.Error(exception, $"A global unhandled exception occurred: {exception.Message}, StackTrace: {exception.StackTrace}");
+                System.Console.WriteLine("A global unhandled exception occurred. Please check the log for details.");
+            }
+            else
+            {
+                Serilog.Log.Error("An unknown exception occurred.");
+                System.Console.WriteLine("An unknown exception occurred. Please check the log for details.");
+            }
         }
+
     }
 }
