@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using MultipleTiersArchitectureTemplate.BLL; // Added for ITestService
 
 namespace MultipleTiersArchitectureTemplate.Webapi.Controllers
 {
@@ -6,24 +7,27 @@ namespace MultipleTiersArchitectureTemplate.Webapi.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
+        private readonly ITestService _testService; // Added field for ITestService
         private static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ITestService testService) // Constructor injection
         {
-            
+            _testService = testService;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
+            // Example usage of ITestService
+            _testService.Test(); // Call the Test method to demonstrate usage
+            
             // test purpose
-            throw new Exception("This is a test exception to trigger logging.");
+            // throw new Exception("This is a test exception to trigger logging.");
 
             // write a log here for test
-            Serilog.Log.Error("test");
+            // Serilog.Log.Error("test");
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),

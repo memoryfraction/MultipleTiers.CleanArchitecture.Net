@@ -1,5 +1,6 @@
 
 using Serilog;
+using MultipleTiersArchitectureTemplate.BLL; // Added for ITestService and TestService
 using MultipleTiersArchitectureTemplate.Webapi.Middleware;
 
 namespace MultipleTiersArchitectureTemplate.Webapi
@@ -9,6 +10,9 @@ namespace MultipleTiersArchitectureTemplate.Webapi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            // Register the TestService for Dependency Injection
+            builder.Services.AddScoped<ITestService, TestService>();
 
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.File(
