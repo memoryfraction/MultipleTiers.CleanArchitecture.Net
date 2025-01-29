@@ -22,12 +22,13 @@ namespace MultipleTiersArchitectureTemplate.Webapi.Controllers
         {
             // Example usage of ITestService
             _testService.Test(); // Call the Test method to demonstrate usage
-            
+
             // test purpose
             // throw new Exception("This is a test exception to trigger logging.");
 
             // write a log here for test
-            // Serilog.Log.Error("test");
+            // Test whether Log works
+            Serilog.Log.Information($"Current utc datetime: {DateTime.UtcNow}");
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),

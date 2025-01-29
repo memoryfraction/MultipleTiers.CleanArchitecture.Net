@@ -1,4 +1,4 @@
-
+﻿
 using Serilog;
 using MultipleTiersArchitectureTemplate.BLL; // Added for ITestService and TestService
 using MultipleTiersArchitectureTemplate.Webapi.Middleware;
@@ -11,6 +11,15 @@ namespace MultipleTiersArchitectureTemplate.Webapi
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Build the configuration for config file
+            IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile("appsettings.development.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("appsettings.stage.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("appsettings.production.json", optional: true, reloadOnChange: true)
+                .Build();
+
             // Register the TestService for Dependency Injection
             builder.Services.AddScoped<ITestService, TestService>();
 
@@ -21,6 +30,11 @@ namespace MultipleTiersArchitectureTemplate.Webapi
                     retainedFileCountLimit: 365)
                 .CreateLogger();
 
+            // Log the current environment
+            var environment = builder.Environment;
+            Log.Information("Current environment: {EnvironmentName}", environment.EnvironmentName);
+
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -28,12 +42,12 @@ namespace MultipleTiersArchitectureTemplate.Webapi
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
+            // Configure the HTTP request pipeline for all environment
+            //if (app.Environment.IsDevelopment())
+            //{
                 app.UseSwagger();
                 app.UseSwaggerUI();
-            }
+            //}
 
             app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseAuthorization();
