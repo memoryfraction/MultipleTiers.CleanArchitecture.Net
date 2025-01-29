@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultipleTiersArchitectureTemplate.Webapi", "MultipleTiersArchitectureTemplate.Webapi\MultipleTiersArchitectureTemplate.Webapi.csproj", "{0D7FCC2C-FAC5-43D2-B4E4-7DCF161F8527}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultipleTiersArchitectureTemplate.BLL", "MultipleTiersArchitectureTemplate.BLL\MultipleTiersArchitectureTemplate.BLL.csproj", "{D8CCF465-E994-4BFD-A6AC-7EC8A585FB78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultipleTiersArchitectureTemplate.DAL", "MultipleTiersArchitectureTemplate.DAL\MultipleTiersArchitectureTemplate.DAL.csproj", "{1BCCB2E5-992C-4CAE-87E4-E40A4672B568}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultipleTiersArchitectureTemplate.Models", "MultipleTiersArchitectureTemplate.Models\MultipleTiersArchitectureTemplate.Models.csproj", "{81FCC97F-3420-49BC-B3AF-891EF7FCF38D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultipleTiersArchitectureTemplate.Tests", "MultipleTiersArchitectureTemplate.Tests\MultipleTiersArchitectureTemplate.Tests.csproj", "{C506F09A-4B19-4F95-BCF0-72C468584719}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D7FCC2C-FAC5-43D2-B4E4-7DCF161F8527}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D7FCC2C-FAC5-43D2-B4E4-7DCF161F8527}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D7FCC2C-FAC5-43D2-B4E4-7DCF161F8527}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D7FCC2C-FAC5-43D2-B4E4-7DCF161F8527}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8CCF465-E994-4BFD-A6AC-7EC8A585FB78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8CCF465-E994-4BFD-A6AC-7EC8A585FB78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8CCF465-E994-4BFD-A6AC-7EC8A585FB78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8CCF465-E994-4BFD-A6AC-7EC8A585FB78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BCCB2E5-992C-4CAE-87E4-E40A4672B568}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BCCB2E5-992C-4CAE-87E4-E40A4672B568}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BCCB2E5-992C-4CAE-87E4-E40A4672B568}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BCCB2E5-992C-4CAE-87E4-E40A4672B568}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81FCC97F-3420-49BC-B3AF-891EF7FCF38D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81FCC97F-3420-49BC-B3AF-891EF7FCF38D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81FCC97F-3420-49BC-B3AF-891EF7FCF38D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81FCC97F-3420-49BC-B3AF-891EF7FCF38D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C506F09A-4B19-4F95-BCF0-72C468584719}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C506F09A-4B19-4F95-BCF0-72C468584719}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C506F09A-4B19-4F95-BCF0-72C468584719}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C506F09A-4B19-4F95-BCF0-72C468584719}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
