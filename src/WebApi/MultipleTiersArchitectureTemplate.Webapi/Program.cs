@@ -1,5 +1,6 @@
 
 using Serilog;
+using MultipleTiersArchitectureTemplate.Webapi.Middleware;
 
 namespace MultipleTiersArchitectureTemplate.Webapi
 {
@@ -30,6 +31,7 @@ namespace MultipleTiersArchitectureTemplate.Webapi
                 app.UseSwaggerUI();
             }
 
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.UseAuthorization();
 
 

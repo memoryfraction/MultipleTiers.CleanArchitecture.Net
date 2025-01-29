@@ -13,12 +13,15 @@ namespace MultipleTiersArchitectureTemplate.Webapi.Controllers
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
-           
+            
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
+            // test purpose
+            throw new Exception("This is a test exception to trigger logging.");
+
             // write a log here for test
             Serilog.Log.Error("test");
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
